@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Forecast</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Weather Forecast</h1>
+  <div class="container">
+  </div>
 
-  <body>
-    <h1>Weather Dashboard</h1>
+  <form id="user-form">
+    <h2>Search</h2>
+    <input type="text" id="search" placeholder="Enter city name">
+    <button type="submit">Search</button>
+  </form>
 
-    <div>
-      <div class="card">
-        <h3 class="card-header">Search for a City</h3>
-        <form id="user-form" class="card-body">
-          <label class="form-label" for="search">Search</label>
-          <input id="search" type="text" class="form-input" />
-          <button type="submit" class="btn">Get City</button>
-        </form>
-      </div>
-    </div>
+  <div id="citiesContainer">
+    <h2>History</h2>
+    <ul id="searchResults">
+    </ul>
+  </div>
 
-    <div class="container">
-
-    <div class="history-container"></div>
-
-    </div>
-    <script src="./script.js"></script>
-  </body>
-  </html>
+  <script src="script.js"></script>
+</body>
+</html>
