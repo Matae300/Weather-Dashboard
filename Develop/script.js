@@ -9,7 +9,7 @@ var formSubmitHandler = function (event) {
 
   if (search) {
     getCity(search);
-    input.value = ''; 
+    input.value = '';
   } else {
     alert('Please enter a city');
   }
@@ -33,12 +33,12 @@ var getCity = function (city) {
       console.error('Error fetching data:', error);
       alert('City not found. Please try again.');
     });
-}
+};
 
 var displayWeatherForecast = function (data) {
   container.textContent = '';
   var cityName = document.createElement('h1');
-  cityName.textContent = data.city.name; 
+  cityName.textContent = data.city.name;
   container.appendChild(cityName);
 
   var uniqueDates = [];
@@ -53,16 +53,16 @@ var displayWeatherForecast = function (data) {
 
   forecastData.forEach(function (forecast) {
     var forecastInfo = document.createElement('div');
-    
 
     var forecastDate = new Date(forecast.dt * 1000);
     var localDate = forecastDate.toLocaleDateString();
     var localTime = forecastDate.toLocaleTimeString();
 
-
     var tempCelsius = forecast.main.temp - 273.15;
+    var windSpeed = forecast.wind.speed; 
+    var humidity = forecast.main.humidity; 
 
-    forecastInfo.textContent = `Date: ${localDate}, Time: ${localTime}, Temperature: ${tempCelsius.toFixed(2)}°C, Description: ${forecast.weather[0].description}`;
+    forecastInfo.textContent = `Date: ${localDate}, Time: ${localTime}, Temperature: ${tempCelsius.toFixed(2)}°C, Description: ${forecast.weather[0].description}, Wind Speed: ${windSpeed} m/s, Humidity: ${humidity}%`;
 
     var iconCode = forecast.weather[0].icon;
     var iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
@@ -72,36 +72,43 @@ var displayWeatherForecast = function (data) {
 
     container.appendChild(forecastInfo);
   });
-}
+};
 
 userForm.addEventListener('submit', formSubmitHandler);
 
 function storeHistory(city) {
   var cityData = {
     title: city.city.name,
-    forecast: city.list.slice(0, 5), 
+    forecast: city.list.slice(0, 5),
   };
 
   var cities = JSON.parse(localStorage.getItem('city')) || [];
   cities.push(cityData);
   localStorage.setItem('city', JSON.stringify(cities));
+
+  updateSearchHistory(); 
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function updateSearchHistory() {
   var citiesContainer = document.getElementById('citiesContainer');
-  var cities = JSON.parse(localStorage.getItem('city')) || [];
+  citiesContainer.textContent = ''; 
 
+  var cities = JSON.parse(localStorage.getItem('city')) || [];
   cities.forEach(function (city) {
     var cityEl = document.createElement('li');
     cityEl.textContent = city.title;
     cityEl.setAttribute('class', 'searchHistory');
     citiesContainer.appendChild(cityEl);
   });
-});
+}
 
-document.addEventListener('click', function (event) {
-  if (event.target.classList.contains('searchHistory')) {
-    var city = event.target.textContent;
-    getCity(city);
-  }
+document.addEventListener('DOMContentLoaded', function() {
+  updateSearchHistory(); 
+
+  document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('searchHistory')) {
+      var city = event.target.textContent;
+      getCity(city);
+    }
+  });
 });
