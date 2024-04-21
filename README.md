@@ -31,6 +31,10 @@ The searched city is added to the search history.
 Click on a city in the search history to view its weather conditions again.
 Screenshots
 
+## Link to deployed site
+
+https://matae300.github.io/Weather-Dashboard-App/Develop/index.html
+
 ## Credits
 Matheus Almeida
 Weather icons provided by OpenWeatherMap
