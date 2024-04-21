@@ -4,6 +4,8 @@
 
 This weather dashboard allows users to search for a city and view current and future weather conditions. The application also keeps track of search history for easy access to previously searched cities.
 
+![scrrenshot](./Develop/assets/screenshot.jpeg)
+
 ## Features
 
 Search for a city to view current and future weather conditions.
