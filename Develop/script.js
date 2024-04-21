@@ -53,6 +53,7 @@ var displayWeatherForecast = function (data) {
 
   forecastData.forEach(function (forecast) {
     var forecastInfo = document.createElement('div');
+    forecastInfo.classList.add('forecast-div');
 
     var forecastDate = new Date(forecast.dt * 1000);
     var localDate = forecastDate.toLocaleDateString();
@@ -62,7 +63,16 @@ var displayWeatherForecast = function (data) {
     var windSpeed = forecast.wind.speed; 
     var humidity = forecast.main.humidity; 
 
-    forecastInfo.textContent = `Date: ${localDate}, Time: ${localTime}, Temperature: ${tempCelsius.toFixed(2)}°C, Description: ${forecast.weather[0].description}, Wind Speed: ${windSpeed} m/s, Humidity: ${humidity}%`;
+    forecastInfo.innerHTML = `
+    <div class="card-body">
+      <h5 class="card-title">${localDate}</h5>
+      <p class="card-text">Time: ${localTime}</p>
+      <p class="card-text">Temperature: ${tempCelsius.toFixed(2)}°C</p>
+      <p class="card-text">Description: ${forecast.weather[0].description}</p>
+      <p class="card-text">Wind Speed: ${windSpeed} m/s</p>
+      <p class="card-text">Humidity: ${humidity}%</p>
+    </div>
+  `;
 
     var iconCode = forecast.weather[0].icon;
     var iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
